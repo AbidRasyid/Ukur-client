@@ -191,6 +191,25 @@ class _DetailContent extends StatelessWidget {
                     ),
                   ),
 
+                  const SectionHeader(title: "Catatan"),
+                  Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: AppTheme.surface,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: AppTheme.divider),
+                      ),
+                      child: Text(
+                        (customer.catatan != null &&
+                                customer.catatan!.isNotEmpty)
+                            ? customer.catatan!
+                            : "tidak ada catatan",
+                        style: const TextStyle(
+                            fontSize: 14, color: AppTheme.textSecondary),
+                      )),
+
                   // Ukuran Section
                   const SectionHeader(title: 'Data Ukuran'),
                   if (customer.ukuran.isEmpty)

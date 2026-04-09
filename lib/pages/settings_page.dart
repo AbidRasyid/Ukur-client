@@ -98,7 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ]),
 
-          // ─ Deskripsi ─
+          // ─ catatan ─
           Container(
             margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
             padding: const EdgeInsets.all(16),

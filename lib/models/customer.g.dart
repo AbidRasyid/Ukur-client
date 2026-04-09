@@ -22,15 +22,16 @@ class CustomerAdapter extends TypeAdapter<Customer> {
       noHp: fields[2] as String?,
       jenisPakaian: fields[3] as String,
       ukuran: (fields[4] as Map).cast<String, double>(),
-      createdAt: fields[5] as DateTime,
-      updatedAt: fields[6] as DateTime,
+      catatan: fields[5] as String?,
+      createdAt: fields[6] as DateTime,
+      updatedAt: fields[7] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, Customer obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -42,8 +43,10 @@ class CustomerAdapter extends TypeAdapter<Customer> {
       ..writeByte(4)
       ..write(obj.ukuran)
       ..writeByte(5)
-      ..write(obj.createdAt)
+      ..write(obj.catatan)
       ..writeByte(6)
+      ..write(obj.createdAt)
+      ..writeByte(7)
       ..write(obj.updatedAt);
   }
 

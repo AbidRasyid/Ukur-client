@@ -21,6 +21,7 @@ class _AddEditPageState extends State<AddEditPage> {
   final _formKey = GlobalKey<FormState>();
   final _namaController = TextEditingController();
   final _noHpController = TextEditingController();
+  final _catatanController = TextEditingController();
 
   String _jenisPakaian = 'Atasan';
   final Map<String, TextEditingController> _ukuranControllers = {};
@@ -36,13 +37,16 @@ class _AddEditPageState extends State<AddEditPage> {
       _noHpController.text = widget.customer!.noHp ?? '';
       _jenisPakaian = widget.customer!.jenisPakaian;
       // Load existing ukuran
-      widget.customer!.ukuran.forEach((key, value) {
-        _ukuranControllers[key] = TextEditingController(
-          text: value > 0
-              ? (value % 1 == 0 ? value.toInt().toString() : value.toString())
-              : '',
-        );
-      });
+      widget.customer!.ukuran.forEach(
+        (key, value) {
+          _ukuranControllers[key] = TextEditingController(
+            text: value > 0
+                ? (value % 1 == 0 ? value.toInt().toString() : value.toString())
+                : '',
+          );
+        },
+      );
+      _catatanController.text = widget.customer!.catatan ?? '';
     } else {
       _loadPreset(_jenisPakaian);
     }
@@ -151,6 +155,9 @@ class _AddEditPageState extends State<AddEditPage> {
               : _noHpController.text.trim(),
           jenisPakaian: _jenisPakaian,
           ukuran: ukuran,
+          catatan: _catatanController.text.trim().isEmpty
+              ? null
+              : _catatanController.text.trim(),
           updatedAt: now,
         );
         await CustomerService.updateCustomer(updated);
@@ -163,6 +170,9 @@ class _AddEditPageState extends State<AddEditPage> {
               : _noHpController.text.trim(),
           jenisPakaian: _jenisPakaian,
           ukuran: ukuran,
+          catatan: _catatanController.text.trim().isEmpty
+              ? null
+              : _catatanController.text.trim(),
           createdAt: now,
           updatedAt: now,
         );
@@ -197,6 +207,7 @@ class _AddEditPageState extends State<AddEditPage> {
   void dispose() {
     _namaController.dispose();
     _noHpController.dispose();
+    _catatanController.dispose();
     for (var c in _ukuranControllers.values) {
       c.dispose();
     }
@@ -254,6 +265,19 @@ class _AddEditPageState extends State<AddEditPage> {
               ),
             ),
             _buildUkuranSection(satuan),
+            const SizedBox(height: 16),
+            const SectionHeader(title: "catatan"),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: TextFormField(
+                controller: _catatanController,
+                maxLines: 3,
+                decoration: const InputDecoration(
+                  labelText: 'catatan (opsional)',
+                  prefixIcon: Icon(Icons.description),
+                ),
+              ),
+            ),
           ],
         ),
       ),

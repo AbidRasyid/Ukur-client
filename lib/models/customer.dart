@@ -20,9 +20,12 @@ class Customer extends HiveObject {
   late Map<String, double> ukuran;
 
   @HiveField(5)
-  late DateTime createdAt;
+  String? catatan;
 
   @HiveField(6)
+  late DateTime createdAt;
+
+  @HiveField(7)
   late DateTime updatedAt;
 
   Customer({
@@ -31,6 +34,7 @@ class Customer extends HiveObject {
     this.noHp,
     required this.jenisPakaian,
     required this.ukuran,
+    this.catatan,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -41,6 +45,7 @@ class Customer extends HiveObject {
     String? noHp,
     String? jenisPakaian,
     Map<String, double>? ukuran,
+    String? catatan,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -52,6 +57,7 @@ class Customer extends HiveObject {
       ukuran: ukuran ?? this.ukuran,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      catatan: catatan ?? this.catatan,
     );
   }
 }

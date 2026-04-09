@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="ukur_client"
-        android:name="${applicationName}"
+        android:label="Ukur Client"
+        android:name="ukur_client"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
