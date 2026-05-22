@@ -6,14 +6,17 @@ class CustomerService {
   static Box<Customer>? _box;
 
   static Future<void> init() async {
-    await Hive.initFlutter();
-    Hive.registerAdapter(CustomerAdapter());
+    if (!Hive.isAdapterRegistered(0)) {
+      Hive.registerAdapter(CustomerAdapter());
+    }
+
     _box = await Hive.openBox<Customer>(_boxName);
   }
 
   static Box<Customer> get box {
     if (_box == null || !_box!.isOpen) {
-      throw Exception('Hive box belum dibuka. Panggil CustomerService.init() terlebih dahulu.');
+      throw Exception(
+          'Hive box belum dibuka. Panggil CustomerService.init() terlebih dahulu.');
     }
     return _box!;
   }
@@ -36,20 +39,20 @@ class CustomerService {
 
   // Ambil semua pelanggan (sorted by updatedAt desc)
   static List<Customer> getAllCustomers() {
-    final customers = box.values.toList();
+    final customers = <Customer>[];
+    for (final customer in box.values) {
+      customers.add(customer);
+    }
     customers.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
     return customers;
   }
 
   // Cari pelanggan berdasarkan nama
   static List<Customer> searchCustomers(String query) {
-    if (query.isEmpty) return getAllCustomers();
-    final lowerQuery = query.toLowerCase();
-    return getAllCustomers()
-        .where((c) =>
-            c.nama.toLowerCase().contains(lowerQuery) ||
-            (c.noHp?.contains(query) ?? false))
-        .toList();
+    return box.values.where((c) {
+      return c.nama.toLowerCase().contains(query) ||
+          (c.noHp?.contains(query) ?? false);
+    }).toList();
   }
 
   // Ambil satu pelanggan by id

@@ -5,28 +5,28 @@ part 'customer.g.dart';
 @HiveType(typeId: 0)
 class Customer extends HiveObject {
   @HiveField(0)
-  late String id;
+  final String id;
 
   @HiveField(1)
-  late String nama;
+  final String nama;
 
   @HiveField(2)
   String? noHp;
 
   @HiveField(3)
-  late String jenisPakaian; // 'Atasan', 'Bawahan', 'custom'
+  final String jenisPakaian; // 'Atasan', 'Bawahan', 'custom'
 
   @HiveField(4)
-  late Map<String, double> ukuran;
+  final Map<String, double> ukuran;
 
   @HiveField(5)
   String? catatan;
 
   @HiveField(6)
-  late DateTime createdAt;
+  DateTime createdAt;
 
   @HiveField(7)
-  late DateTime updatedAt;
+  DateTime updatedAt;
 
   Customer({
     required this.id,
@@ -55,9 +55,9 @@ class Customer extends HiveObject {
       noHp: noHp ?? this.noHp,
       jenisPakaian: jenisPakaian ?? this.jenisPakaian,
       ukuran: ukuran ?? this.ukuran,
+      catatan: catatan ?? this.catatan,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
-      catatan: catatan ?? this.catatan,
     );
   }
 }

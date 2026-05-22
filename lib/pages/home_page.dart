@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                     height: 56,
                     child: Center(
                       child: Image(
-                          image: AssetImage('assets/icons/logo.png'),
+                          image: AssetImage('assets/icons/Logo.png'),
                           width: 56,
                           height: 56),
                     ),

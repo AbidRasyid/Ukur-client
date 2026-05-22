@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'services/customer_service.dart';
 import 'services/settings_service.dart';
 import 'widgets/app_theme.dart';
@@ -9,22 +11,38 @@ import 'pages/home_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Inisialisasi locale Indonesia
-  await initializeDateFormatting('id_ID', null);
+  try {
+    await Hive.initFlutter();
 
-  // Inisialisasi Hive
-  await CustomerService.init();
-  await SettingsService.init();
+    await initializeDateFormatting('id_ID', null);
 
-  // Status bar style
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: AppTheme.primary,
-      statusBarIconBrightness: Brightness.light,
-    ),
-  );
+    await CustomerService.init();
+    await SettingsService.init();
 
-  runApp(const UkurClientApp());
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: AppTheme.primary,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
+
+    runApp(const UkurClientApp());
+  } catch (e, stack) {
+    runApp(
+      MaterialApp(
+        home: Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.all(20),
+            child: SingleChildScrollView(
+              child: Text(
+                'ERROR:\n\n$e\n\nSTACK:\n\n$stack',
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class UkurClientApp extends StatelessWidget {

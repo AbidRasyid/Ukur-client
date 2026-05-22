@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/customer_service.dart';
-import '../services/settings_service.dart';
+
 import '../widgets/app_theme.dart';
 import '../widgets/common_widgets.dart';
 
@@ -12,12 +12,9 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  String _satuan = 'cm';
-
   @override
   void initState() {
     super.initState();
-    _satuan = SettingsService.satuan;
   }
 
   Future<void> _hapusSemua() async {
@@ -52,12 +49,6 @@ class _SettingsPageState extends State<SettingsPage> {
       body: ListView(
         padding: const EdgeInsets.only(bottom: 32),
         children: [
-          // ─ Preferensi ─
-          const SectionHeader(title: 'Preferensi'),
-          _settingsCard([
-            _buildSatuanTile(),
-          ]),
-
           // ─ Data ─
           const SectionHeader(title: 'Data'),
           _settingsCard([
@@ -154,67 +145,6 @@ class _SettingsPageState extends State<SettingsPage> {
         border: Border.all(color: AppTheme.divider),
       ),
       child: Column(children: children),
-    );
-  }
-
-  Widget _buildSatuanTile() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
-        children: [
-          const Icon(Icons.straighten_rounded, color: AppTheme.primary),
-          const SizedBox(width: 16),
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Satuan Ukuran',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  'Pilih satuan yang digunakan',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppTheme.textSecondary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SegmentedButton<String>(
-            segments: const [
-              ButtonSegment(value: 'cm', label: Text('cm')),
-              ButtonSegment(value: 'inch', label: Text('inch')),
-            ],
-            selected: {_satuan},
-            onSelectionChanged: (value) async {
-              final selected = value.first;
-              setState(() => _satuan = selected);
-              await SettingsService.setSatuan(selected);
-              if (mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Satuan diubah ke $selected'),
-                    behavior: SnackBarBehavior.floating,
-                    duration: const Duration(seconds: 1),
-                    margin: const EdgeInsets.all(12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                );
-              }
-            },
-            style: const ButtonStyle(
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

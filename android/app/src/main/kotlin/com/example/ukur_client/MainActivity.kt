@@ -1,4 +1,4 @@
-package com.example.ukur_client
+package com.kuradev.ukurclient
 
 import io.flutter.embedding.android.FlutterActivity
 
