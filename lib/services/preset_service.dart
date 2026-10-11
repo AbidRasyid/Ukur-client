@@ -1,3 +1,5 @@
+import 'package:flutter_svg/flutter_svg.dart';
+
 class PresetService {
   static const Map<String, List<String>> presets = {
     'Atasan': [
@@ -36,10 +38,19 @@ class PresetService {
     'custom': 'Custom',
   };
 
-  static const Map<String, String> jenisPakaianIcon = {
-    'Atasan': '👔',
-    'Bawahan': '👖',
-    'custom': '',
+  static Map<String, Map> jenisPakaianIcon = {
+    'Atasan': {
+      'icon': 'assets/images/shirt_icon.svg',
+      'clicked': 'assets/images/shirt_icon_clicked.svg'
+    },
+    'Bawahan': {
+      'icon': 'assets/images/trousers_icon.svg',
+      'clicked': 'assets/images/trousers_icon_clicked.svg'
+    },
+    'custom': {
+      'icon': 'assets/images/custom_icon.svg',
+      'clicked': 'assets/images/custom_icon_clicked.svg'
+    },
   };
 
   static List<String> get allJenis => ['Atasan', 'Bawahan', 'custom'];

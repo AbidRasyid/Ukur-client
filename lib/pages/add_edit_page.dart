@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uuid/uuid.dart';
 import '../models/customer.dart';
 import '../services/customer_service.dart';
@@ -50,6 +51,24 @@ class _AddEditPageState extends State<AddEditPage> {
     } else {
       _loadPreset(_jenisPakaian);
     }
+  }
+
+  bool _validateMinimal() {
+    bool addUkuran = _ukuranControllers.values.any((controller) {
+      final text = controller.text.trim();
+      if (text.isEmpty) return false;
+      final value = double.tryParse(text);
+      return value != null && value > 0;
+    });
+
+    if (!addUkuran) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Minimal isi 1 nilai ukuran'),
+        behavior: SnackBarBehavior.floating,
+      ));
+      return false;
+    }
+    return true;
   }
 
   void _loadPreset(String jenis) {
@@ -136,7 +155,9 @@ class _AddEditPageState extends State<AddEditPage> {
 
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
-
+    if (!_validateMinimal()) {
+      return;
+    }
     setState(() => _isSaving = true);
 
     try {
@@ -382,9 +403,11 @@ class _AddEditPageState extends State<AddEditPage> {
                     ),
                     child: Column(
                       children: [
-                        Text(
-                          PresetService.jenisPakaianIcon[jenis] ?? '',
-                          style: const TextStyle(fontSize: 22),
+                        SvgPicture.asset(
+                          PresetService.jenisPakaianIcon[jenis]
+                              ?[isSelected ? 'clicked' : 'icon'],
+                          width: 24,
+                          height: 24,
                         ),
                         const SizedBox(height: 4),
                         Text(
