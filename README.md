@@ -1,17 +1,41 @@
-# ukur_client
+# Ukur Client
 
-A new Flutter project.
+Aplikasi manajemen data pelanggan dan ukuran baju/pakaian berbasis Flutter. Aplikasi ini dirancang untuk bekerja secara **offline** menggunakan **Hive** sebagai basis data lokal[cite: 2].
 
-## Getting Started
+## 📌 Fitur Utama
 
-This project is a starting point for a Flutter application.
+- **Kelola Data Pelanggan**: Menambah, mengubah, mencari, dan menghapus data pelanggan beserta detail pengukurannya[cite: 2].
+- **Sistem Preset**: Memudahkan pengisian detail ukuran pakaian berdasarkan template/preset yang sering digunakan[cite: 2].
+- **Dukungan Tema**: Pengaturan tema aplikasi (Terang, Gelap, atau Mengikuti Sistem)[cite: 2].
+- **Halaman Donasi**: Dukungan pengembangan aplikasi bagi pengguna yang ingin berkontribusi[cite: 2].
+- **Penyimpanan Lokal (Offline)**: Seluruh data tersimpan aman di perangkat pengguna menggunakan Hive[cite: 2].
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Teknologi & Libs
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- **Framework**: [Flutter](https://flutter.dev)
+- **Database**: [Hive](https://pub.dev/packages/hive) & [Hive Flutter](https://pub.dev/packages/hive_flutter)
+- **Code Generation**: [Hive Generator](https://pub.dev/packages/hive_generator) & [Build Runner](https://pub.dev/packages/build_runner)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📁 Struktur Proyek
+
+```text
+lib/
+├── models/         # Model data (Customer, TypeAdapter Hive)
+├── pages/          # Layar UI (Home, Add/Edit, Detail, Settings, Donate)
+├── services/       # Layanan data (CustomerService, PresetService, SettingsService)
+├── widgets/        # Komponen UI dan tema aplikasi
+└── main.dart       # Titik masuk utama aplikasi
+```[cite: 2]
+
+## 📱 Deployment & Platform
+
+- **Android**: *Fokus Utama / Didukung* (Siap dijalankan dan dipasang melalui berkas APK).
+- **iOS, Web, & Desktop**: *Tahap Rencana / Eksperimental* (Berkas konfigurasi tersedia, namun fokus pengujian saat ini masih pada Android)[cite: 2].
+
+## 🚀 Cara Menjalankan Proyek
+
+1. **Prasyarat**: Pastikan Flutter SDK sudah terpasang di komputer Anda.
+2. **Klon Repositori**:
+   ```bash
+   git clone [https://github.com/username/Ukur-client.git](https://github.com/username/Ukur-client.git)
+   cd Ukur-client
