@@ -21,10 +21,11 @@ class DetailPage extends StatelessWidget {
         final customer = CustomerService.getCustomer(customerId);
         if (customer == null) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.pop(context);
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            }
           });
-          return const Scaffold(
-              body: Center(child: CircularProgressIndicator()));
+          return const SizedBox.shrink();
         }
         return _DetailContent(customer: customer);
       },
@@ -55,7 +56,6 @@ class _DetailContent extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           ),
         );
-        Navigator.pop(context);
       }
     }
   }
