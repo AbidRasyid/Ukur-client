@@ -2,7 +2,7 @@ name: ukur_client
 description: Aplikasi penyimpan data ukuran pelanggan untuk penjahit
 publish_to: 'none'
 
-version: 1.2.1+1
+version: 1.2.2+1
 
 environment:
   sdk: ">=3.3.0 <4.0.0"

@@ -30,7 +30,7 @@ class _SettingsPageState extends State<SettingsPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: const Text('✅ Semua data berhasil dihapus'),
+            content: const Text('Semua data berhasil dihapus'),
             behavior: SnackBarBehavior.floating,
             margin: const EdgeInsets.all(12),
             shape:
@@ -72,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
               leading:
                   Icon(Icons.info_outline_rounded, color: AppTheme.primary),
               title: Text('Ukur Client'),
-              subtitle: Text('Versi 1.0.0'),
+              subtitle: Text('Versi 1.2.2'),
             ),
             const Divider(height: 1, indent: 56),
             const ListTile(
