@@ -1,5 +1,3 @@
-import 'package:flutter_svg/flutter_svg.dart';
-
 class PresetService {
   static const Map<String, List<String>> presets = {
     'Atasan': [
